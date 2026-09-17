@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>Consulta Placa Seguro</title>
+
+<meta name="description" content="Sistema de consulta de veículos pela placa">
+
+<link rel="stylesheet" href="style.css">
+```
+
+</head>
+
+<body>
+
+```
+<header class="topo">
+    <div class="logo">
+        🚘 Consulta Placa
+    </div>
+
+    <nav>
+        <a href="#inicio">Início</a>
+        <a href="#sobre">Sobre</a>
+    </nav>
+</header>
+
+
+<main id="inicio">
+
+    <section class="hero">
+
+        <div class="hero-conteudo">
+
+            <span class="badge">CONSULTA VEICULAR</span>
+
+            <h1>
+                Consulte a placa de um veículo
+            </h1>
+
+            <p>
+                Verifique informações disponíveis sobre o veículo de forma rápida e simples.
+            </p>
+
+            <div class="card-consulta">
+
+                <label for="placa">Digite a placa do veículo</label>
+
+                <div class="input-area">
+
+                    <input
+                        type="text"
+                        id="placa"
+                        placeholder="ABC1D23"
+                        maxlength="7"
+                        autocomplete="off"
+                    >
+
+                    <button onclick="consultarPlaca()">
+                        CONSULTAR
+                    </button>
+
+                </div>
+
+                <small>
+                    Informe uma placa válida no padrão Mercosul ou antigo.
+                </small>
+
+            </div>
+
+        </div>
+
+        <div class="hero-icone">
+            🚗
+        </div>
+
+    </section>
+
+
+    <section class="resultado-section">
+
+        <div id="carregando" class="resultado oculto">
+            <div class="spinner"></div>
+            <h2>Consultando veículo...</h2>
+            <p>Aguarde enquanto buscamos as informações.</p>
+        </div>
+
+
+        <div id="resultado" class="resultado oculto">
+
+            <div class="resultado-header">
+                <span class="status-icon">🔍</span>
+                <h2>Resultado da Consulta</h2>
+            </div>
+
+            <div class="placa-exibida" id="placaResultado">
+                ABC1D23
+            </div>
+
+            <div class="status-box" id="statusVeiculo">
+                Aguardando consulta
+            </div>
+
+            <div class="dados-grid">
+
+                <div class="dado">
+                    <span>Placa</span>
+                    <strong id="dadosPlaca">---</strong>
+                </div>
+
+                <div class="dado">
+                    <span>Marca</span>
+                    <strong id="dadosMarca">---</strong>
+                </div>
+
+                <div class="dado">
+                    <span>Modelo</span>
+                    <strong id="dadosModelo">---</strong>
+                </div>
+
+                <div class="dado">
+                    <span>Ano</span>
+                    <strong id="dadosAno">---</strong>
+                </div>
+
+            </div>
+
+            <div class="aviso">
+                ⚠️ As informações exibidas dependem da fonte de dados autorizada conectada ao sistema.
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section id="sobre" class="sobre">
+
+        <h2>Como funciona?</h2>
+
+        <div class="cards-info">
+
+            <div class="info-card">
+                <span>01</span>
+                <h3>Digite a placa</h3>
+                <p>Informe a placa do veículo que deseja consultar.</p>
+            </div>
+
+            <div class="info-card">
+                <span>02</span>
+                <h3>Consulta segura</h3>
+                <p>O sistema envia a solicitação para uma fonte autorizada.</p>
+            </div>
+
+            <div class="info-card">
+                <span>03</span>
+                <h3>Veja o resultado</h3>
+                <p>As informações disponíveis são apresentadas na tela.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <p>© 2026 Consulta Placa Seguro</p>
+    <p>Sistema informativo de consulta veicular.</p>
+
+</footer>
+
+
+<script src="script.js"></script>
+```
+
+</body>
+</html>
