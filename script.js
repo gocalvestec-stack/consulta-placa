@@ -1,9 +1,9 @@
 async function consultarPlaca() {
 
 ```
-const placaInput = document.getElementById("placa");
+const input = document.getElementById("placa");
 
-const placa = placaInput.value
+const placa = input.value
     .trim()
     .toUpperCase();
 
@@ -21,26 +21,28 @@ if (placa.length < 7) {
 }
 
 
-// Mostra carregamento
 resultado.classList.add("oculto");
 carregando.classList.remove("oculto");
 
 
 try {
 
-    const resposta = await fetch("http://localhost:3000/api/consulta", {
+    const resposta = await fetch(
+        "http://localhost:3000/api/consulta",
+        {
 
-        method: "POST",
+            method: "POST",
 
-        headers: {
-            "Content-Type": "application/json"
-        },
+            headers: {
+                "Content-Type": "application/json"
+            },
 
-        body: JSON.stringify({
-            placa: placa
-        })
+            body: JSON.stringify({
+                placa: placa
+            })
 
-    });
+        }
+    );
 
 
     const dados = await resposta.json();
@@ -61,74 +63,53 @@ try {
     resultado.classList.remove("oculto");
 
 
-    document.getElementById("placaResultado").innerText = placa;
+    // Placa
+    document.getElementById("placaResultado").innerText =
+        dados.placa;
 
-    document.getElementById("dadosPlaca").innerText = placa;
-
-
-    /*
-    ======================================
-    INTERPRETAÇÃO DOS DADOS DA API
-    ======================================
-    */
-
-    const veiculo = dados.dados?.dados || dados.dados?.data || {};
+    document.getElementById("dadosPlaca").innerText =
+        dados.placa;
 
 
+    // Dados do veículo
     document.getElementById("dadosMarca").innerText =
-        veiculo.marca ||
-        veiculo.marcaModelo ||
-        veiculo.marca_modelo ||
-        "Não informado";
-
+        dados.veiculo?.marca || "Não informado";
 
     document.getElementById("dadosModelo").innerText =
-        veiculo.modelo ||
-        veiculo.marcaModelo ||
-        veiculo.marca_modelo ||
-        "Não informado";
-
+        dados.veiculo?.modelo || "Não informado";
 
     document.getElementById("dadosAno").innerText =
-        veiculo.ano ||
-        veiculo.anoModelo ||
-        veiculo.ano_modelo ||
-        "Não informado";
+        dados.veiculo?.ano || "Não informado";
 
 
+    // Status de segurança
     const status = document.getElementById("statusVeiculo");
 
 
-    /*
-    ======================================
-    VERIFICAÇÃO DE ROUBO/FURTO
+    if (dados.seguranca.status === "ROUBADO_FURTADO") {
 
-    O campo exato depende da API contratada.
-    ======================================
-    */
-
-    const rouboFurto =
-        veiculo.roubo_furto ||
-        veiculo.rouboFurto ||
-        veiculo.roubo_ou_furto ||
-        veiculo.restricoes?.rouboOuFurto;
-
-
-    if (rouboFurto === true ||
-        rouboFurto === "CONSTA" ||
-        rouboFurto === "SIM") {
-
-        status.innerText = "⚠️ ATENÇÃO: INDÍCIO DE ROUBO OU FURTO";
+        status.innerText = "⚠️ ROUBADO/FURTADO";
 
         status.style.background = "#5c1717";
         status.style.color = "#ff7777";
 
-    } else {
 
-        status.innerText = "Situação consultada na base autorizada";
+    } else if (dados.seguranca.status === "SEM_REGISTRO") {
+
+        status.innerText =
+            "✓ SEM REGISTRO DE ROUBO/FURTO";
 
         status.style.background = "#163d2b";
         status.style.color = "#63e6a0";
+
+
+    } else {
+
+        status.innerText =
+            "⚠️ INFORMAÇÃO INCONCLUSIVA";
+
+        status.style.background = "#493b12";
+        status.style.color = "#ffd166";
 
     }
 
@@ -138,7 +119,7 @@ try {
     carregando.classList.add("oculto");
 
     alert(
-        "Não foi possível conectar ao servidor. Verifique se o backend está funcionando."
+        "Não foi possível conectar ao servidor."
     );
 
     console.error(erro);
