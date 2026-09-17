@@ -337,3 +337,12 @@ nav {
 ```
 
 }
+.status-box {
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+.status-box:empty {
+    display: none;
+}
